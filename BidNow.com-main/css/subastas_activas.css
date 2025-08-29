@@ -1,0 +1,34 @@
+.cont-producto{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    
+}
+
+.titulo-principal{
+    color: #122c52;
+    
+    margin-bottom: 1rem;
+}
+
+h4{
+    text-transform: uppercase;
+    color: aliceblue;
+}
+
+
+
+.producto-imagen{
+    width: 200px; height: 190px;
+    border-radius: 1rem;
+    cursor: pointer;
+    
+}
+
+.producto-detalles{
+    background-color: #8D847B;
+    padding: .5rem;
+    border-radius: 1rem;
+    margin-top: -2rem;
+    position: relative;
+}

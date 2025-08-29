@@ -1,0 +1,49 @@
+.menu {
+    
+    
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.menu h1{
+    margin-left: 30px;
+    color: #3B3330;
+}
+
+
+
+.menu .navbar ul li {
+    position: relative;
+    list-style: none;
+    float: left;
+}
+
+
+.menu .navbar ul li a {
+    font-size: 18px;
+    padding: 20px;
+    color: #3B3330;
+    display: block;
+    text-transform: uppercase;
+
+}
+
+.menu .navbar ul li a:hover {
+    color: #122c52;
+}
+
+.btn-login{
+    border: 2px solid #122c52;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+.btn-login:hover{
+    background-color: white;
+}
