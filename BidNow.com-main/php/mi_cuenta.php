@@ -144,3 +144,149 @@ $conex->close();
 
 </body>
 </html>
+
+<?php
+include("../php/conexion.php");
+
+// Verificar que el usuario ha iniciado sesión
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>
+            alert('Debes iniciar sesión para ver tu historial');
+            window.location.href = '../php/iniciar_sesion.php';
+          </script>";
+    exit();
+}
+
+$usuario_id = $_SESSION['user_id'];
+
+// Consultar subastas finalizadas creadas por el usuario
+$sql = "SELECT producto_id, nombre, precio_actual, imagen, fecha_fin 
+        FROM productos 
+        WHERE estado = 'finalizada' AND usuario_id = ? 
+        ORDER BY fecha_fin DESC";
+
+$stmt = $conex->prepare($sql);
+$stmt->bind_param("i", $usuario_id);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de Subastas</title>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.titulo {
+    text-align: center;
+    color: #122c52;
+    margin-bottom: 20px;
+}
+
+.container-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.producto {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.producto:hover {
+    transform: scale(1.03);
+}
+
+.producto img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.producto h4 {
+    color: #333;
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+.producto p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.sin-historial {
+    text-align: center;
+    color: #777;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+
+    <h2 class="titulo">Historial de Subastas</h2>
+
+    <div class="container-productos">
+        <?php if ($result->num_rows > 0): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <div class="producto">
+                    <img src="../uploads/<?php echo htmlspecialchars($row['imagen']); ?>" 
+                         alt="<?php echo htmlspecialchars($row['nombre']); ?>">
+
+                    <h4><?php echo htmlspecialchars($row['nombre']); ?></h4>
+                    
+                    <p>💰 Precio final: 
+                        $<?php echo number_format($row['precio_actual'], 2, ',', '.'); ?>
+                    </p>
+                    
+                    <p>📅 Finalizó el: <?php echo htmlspecialchars($row['fecha_fin']); ?></p>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p class="sin-historial">No tienes subastas finalizadas.</p>
+        <?php endif; ?>
+    </div>
+</body>
+</html>
+
+<?php
+$stmt->close();
+$conex->close();
+?>
+
+<form action="eliminar_cuenta.php" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar tu cuenta? Esta acción no se puede deshacer.');">
+    <button type="submit" name="eliminar" class="btn-eliminar">
+        ❌ Eliminar mi cuenta
+    </button>
+</form>
+<style>
+    .btn-eliminar {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background-color: #c9302c;
+}
+</style>

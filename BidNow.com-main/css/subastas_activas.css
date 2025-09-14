@@ -1,9 +1,10 @@
 .cont-producto{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    
+    display: flex;
+    flex-wrap: wrap;      /* Para que salten a la siguiente fila */
+    gap: 20px;            /* Espacio entre productos */
+    justify-content: flex-start; /* Alineación a la izquierda */
 }
+    
 
 .titulo-principal{
     color: #122c52;

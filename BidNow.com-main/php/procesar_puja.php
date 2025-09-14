@@ -25,8 +25,8 @@ $producto_id = intval($_POST['producto_id']);
 $monto_puja = floatval($_POST['monto_puja']);
 $usuario_id = $_SESSION['user_id'];
 
-//  Obtener el precio actual de la subasta desde la base de datos
-$sql_producto = "SELECT precio_actual, fecha_fin FROM productos WHERE producto_id = ?";
+//  Obtener el precio actual, la fecha_fin y el dueño del producto
+$sql_producto = "SELECT precio_actual, fecha_fin, usuario_id FROM productos WHERE producto_id = ?";
 $stmt_producto = mysqli_prepare($conex, $sql_producto);
 mysqli_stmt_bind_param($stmt_producto, "i", $producto_id);
 mysqli_stmt_execute($stmt_producto);
@@ -40,6 +40,13 @@ if (mysqli_num_rows($result_producto) == 0) {
 $producto = mysqli_fetch_assoc($result_producto);
 $precio_actual = floatval($producto['precio_actual']);
 $fecha_fin = $producto['fecha_fin'];
+$dueno_producto = $producto['usuario_id'];
+
+// 🚫 Evitar que el dueño puje sobre su propio producto
+if ($usuario_id == $dueno_producto) {
+    echo "<script>alert('No puedes pujar por tu propio producto.'); window.history.back();</script>";
+    exit();
+}
 
 //  Validar que la subasta no ha terminado
 if (strtotime($fecha_fin) < time()) {
@@ -59,7 +66,7 @@ $stmt_update = mysqli_prepare($conex, $sql_update);
 mysqli_stmt_bind_param($stmt_update, "di", $monto_puja, $producto_id);
 
 if (mysqli_stmt_execute($stmt_update)) {
-    //  Registrar la puja en una tabla de historial (opcional, pero recomendado)
+    //  Registrar la puja en la tabla de historial
     $sql_puja = "INSERT INTO pujas (producto_id, usuario_id, monto, fecha_puja) VALUES (?, ?, ?, NOW())";
     $stmt_puja = mysqli_prepare($conex, $sql_puja);
     mysqli_stmt_bind_param($stmt_puja, "iid", $producto_id, $usuario_id, $monto_puja);
