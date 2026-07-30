@@ -1,0 +1,62 @@
+.swiper {
+    margin-top: 200px;
+    background-color: black;
+    
+    
+    color: #3B3330;
+    
+    
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: #122c52;
+}
+
+.swiper-pagination-bullet {
+    background: #5e5e4f; /* Color de las bolitas */
+    border: 2px solid #ffffff; /* Borde blanco */
+    border-radius: 50%; /* Bordes redondeados */
+}
+
+.swiper-pagination-bullet-active {
+    background: #2F4F4F; /* Color de la bolita activa */
+    border: 2px solid #ffffff; /* Borde blanco */
+}
+
+.cont-slider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   
+}
+.cont-slider img{
+    height: 315px;
+    width: 1060px;
+}
+
+.cont-slider .btn-s{
+    padding: 10px;
+    text-decoration: none;
+    width: 150px;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    box-shadow: 2px 2px 5px 2px #D7D0CA;
+
+
+}
+.cont-slider .btn-s:hover{
+    background-color: #a2a2a26c;
+}
+
+.btnes{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+
+}

@@ -1,0 +1,64 @@
+
+
+
+.CFunciona {
+    background-color: #D7D0CA;
+    padding: 60px 5%;
+    text-align: center;
+}
+
+#comoFunciona {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.titulo-p {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#comoFunciona hr {
+    width: 100px;
+    border: none;
+    border-top: 3px solid #007bff;
+    margin: 15px auto 30px auto;
+}
+
+.parrafo-Cfunciona {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #555;
+    text-align: justify;
+    padding: 0 15px;
+}
+
+.parrafo-Cfunciona a {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.parrafo-Cfunciona a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .CFunciona {
+        padding: 40px 3%;
+    }
+
+    .titulo-p {
+        font-size: 2em;
+    }
+
+    .parrafo-Cfunciona {
+        font-size: 1em;
+        text-align: left;
+        padding: 0;
+    }
+}
