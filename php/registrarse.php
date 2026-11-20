@@ -13,7 +13,7 @@
 
 <body>
     <div class="container">
-        <a href="../html/index.html" class="back-link">volver</a>
+        <a href="../index.html" class="back-link">volver</a>
         <div class="form-container">
             <form method="post" id="register_form" action="../php/registrar.php">
                 <h1>crea tu cuenta</h1>
